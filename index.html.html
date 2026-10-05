@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Copart Calculator — Non-Clean Title</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#172033;background:#eef3f8;--blue:#0757a8;--blue2:#0b73d1;--dark:#101820;--metal:#64748b}
+*{box-sizing:border-box}body{margin:0}.wrap{max-width:1050px;margin:0 auto;padding:28px 16px 50px}
+.card{background:#fff;border:1px solid #d7e0ea;border-radius:18px;padding:22px;box-shadow:0 8px 30px #0b3a6814;margin-bottom:18px}
+h1{margin:0 0 7px;font-size:28px;color:var(--dark)}.sub{color:#667085;margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+label{display:block;font-weight:700;font-size:14px;margin-bottom:7px}select,input{width:100%;padding:13px 12px;border:1px solid #cfd6e2;border-radius:10px;font-size:16px;background:#fff}
+.help{font-size:12px;color:#667085;margin-top:6px}.result{background:#f4f8fc;border-radius:14px;padding:18px;border:1px solid #dbe7f3}
+.row{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid #e4e8ef}.row:last-child{border-bottom:0}
+.total{font-size:23px;font-weight:800;padding-top:15px}.fee{font-weight:700}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#e5f1ff;color:var(--blue);font-size:12px;font-weight:800}
+.note{font-size:13px;color:#475467;line-height:1.5}.taxbox{display:none;margin-top:10px}.taxbox.show{display:block}
+button{border:0;border-radius:10px;padding:12px 16px;font-weight:800;font-size:15px;cursor:pointer;background:var(--blue);color:#fff}
+@media(max-width:700px){.grid{grid-template-columns:1fr}h1{font-size:24px}.card{padding:17px}}
+
+
+.brandbar{display:flex;align-items:center;gap:13px;margin:0 0 18px;padding:10px 2px}
+.brandmark{width:48px;height:48px;border-radius:12px;background:linear-gradient(145deg,var(--blue2),var(--blue));color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;box-shadow:0 7px 18px #0757a833}
+.brandname{font-weight:900;letter-spacing:.7px;font-size:16px;color:var(--dark)}
+.brandtag{font-size:12px;color:var(--metal);margin-top:2px}
+.social{margin-top:18px;background:linear-gradient(135deg,#101820,#17395f);color:#fff;border:0}
+.social-title{font-size:18px;font-weight:900;margin-bottom:12px}
+.social-links{display:flex;flex-wrap:wrap;gap:10px}
+.social-links a{color:#fff;text-decoration:none;background:#ffffff18;border:1px solid #ffffff2b;padding:9px 12px;border-radius:10px;font-weight:700;font-size:13px}
+.social-links a:hover{background:#0b73d1}
+.social-note{margin-top:14px;color:#cbd5e1;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="brandbar">
+  <div class="brandmark">FV</div>
+  <div>
+    <div class="brandname">FERNANDO VALLE</div>
+    <div class="brandtag">Autos • Mecánica • Proyectos reales</div>
+  </div>
+</div>
+  <div class="card">
+    <span class="badge">COPART • NON-CLEAN TITLE</span>
+    <h1>Calculadora de factura</h1>
+    <p class="sub">Calcula únicamente los cargos definidos para automóviles, SUVs y pickups con título Non-Clean.</p>
+    <div class="grid">
+      <div>
+        <label for="bid">Final Bid Price (USD)</label>
+        <input id="bid" type="number" min="0" step="0.01" value="10000">
+      </div>
+      <div>
+        <label for="client">Tipo de cliente</label>
+        <select id="client">
+          <option value="personal">Licensed Individual</option>
+          <option value="standard">Business Standard</option>
+          <option value="high">Business High Volume</option>
+        </select>
+        <div class="help">High Volume: más de 25 vehículos/año y más de $75,000/año.</div>
+      </div>
+      <div>
+        <label for="payment">Método de pago</label>
+        <select id="payment">
+          <option value="secured">Secured — transferencia / débito estadounidense</option>
+          <option value="unsecured">Unsecured — crédito / PayPal / Apple Pay / Google Pay</option>
+        </select>
+      </div>
+    </div>
+    <div id="taxbox" class="taxbox">
+      <label><input id="tax" type="checkbox" style="width:auto;margin-right:8px"> Aplicar Sales Tax 10%</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Resultado</h2>
+    <div class="result" id="result"></div>
+  </div>
+
+  <div class="card note">
+    <strong>Reglas de esta calculadora:</strong><br>
+    Solo incluye los costos proporcionados para este proyecto. No agrega storage, late payment, documentation, broker fees, impuestos adicionales ni ningún otro cargo.
+  </div>
+<div class="card social">
+  <div class="social-title">Sígueme</div>
+  <div class="social-links">
+    <a href="https://www.tiktok.com/@fernandovalle33" target="_blank" rel="noopener">TikTok · @fernandovalle33</a>
+    <a href="https://www.instagram.com/Fernando_Valle_97" target="_blank" rel="noopener">Instagram · @Fernando_Valle_97</a>
+    <a href="https://wa.me/50495646996" target="_blank" rel="noopener">WhatsApp · +504 9564-6996</a>
+  </div>
+  <div class="social-note">Construyendo sin presumir · Honduras</div>
+</div>
+</div>
+<script>
+const normalSec=[
+[49.99,25],[99.99,45],[199.99,80],[299.99,130],[349.99,137.5],[399.99,145],[449.99,175],[499.99,185],[549.99,205],[599.99,210],[699.99,240],[799.99,270],[899.99,295],[999.99,320],[1199.99,375],[1299.99,395],[1399.99,410],[1499.99,430],[1599.99,445],[1699.99,465],[1799.99,485],[1999.99,510],[2399.99,535],[2499.99,570],[2999.99,610],[3499.99,655],[3999.99,705],[4499.99,725],[4999.99,750],[5499.99,775],[5999.99,800],[6499.99,825],[6999.99,845],[7499.99,880],[7999.99,900],[8499.99,925],[8999.99,945],[9999.99,945],[10499.99,1000],[10999.99,1000],[11499.99,1000],[11999.99,1000],[12499.99,1000],[14999.99,1000]];
+const normalUn=[
+[49.99,27.5],[99.99,50],[199.99,90],[299.99,145],[349.99,155],[399.99,167.5],[449.99,200],[499.99,210],[549.99,235],[599.99,240],[699.99,275],[799.99,312.5],[899.99,342.5],[999.99,370],[1199.99,440],[1299.99,460],[1399.99,482.5],[1499.99,510],[1599.99,530],[1699.99,555],[1799.99,582.5],[1999.99,620],[2399.99,662.5],[2499.99,705],[2999.99,775],[3499.99,830],[3999.99,927.5],[4499.99,935],[4999.99,1000],[5499.99,1025],[5999.99,1055],[6499.99,1085],[6999.99,1110],[7499.99,1145],[7999.99,1175],[8499.99,1200],[8999.99,1225],[9999.99,1225],[10499.99,1390],[10999.99,1390],[11499.99,1390],[11999.99,1400],[12499.99,1400],[14999.99,1400]];
+const highSec=[
+[49.99,1],[99.99,1],[199.99,25],[299.99,60],[349.99,85],[399.99,100],[449.99,125],[499.99,135],[549.99,145],[599.99,155],[699.99,170],[799.99,195],[899.99,215],[999.99,230],[1199.99,250],[1299.99,270],[1399.99,285],[1499.99,300],[1599.99,315],[1699.99,330],[1799.99,350],[1999.99,370],[2399.99,390],[2499.99,425],[2999.99,460],[3499.99,505],[3999.99,555],[4499.99,600],[4999.99,625],[5499.99,650],[5999.99,675],[6499.99,700],[6999.99,720],[7499.99,755],[7999.99,775],[8499.99,800],[8999.99,820],[9999.99,820],[10499.99,850],[10999.99,850],[11499.99,850],[11999.99,860],[12499.99,875],[14999.99,890]];
+const highUn=[
+[49.99,27.5],[99.99,40],[199.99,65],[299.99,100],[349.99,122.5],[399.99,137.5],[449.99,145],[499.99,155],[549.99,170],[599.99,175],[699.99,200],[799.99,232.5],[899.99,257.5],[999.99,280],[1199.99,310],[1299.99,340],[1399.99,352.5],[1499.99,370],[1599.99,385],[1699.99,405],[1799.99,427.5],[1999.99,455],[2399.99,487.5],[2499.99,525],[2999.99,580],[3499.99,690],[3999.99,737.5],[4499.99,765],[4999.99,790],[5499.99,890],[5999.99,925],[6499.99,950],[6999.99,975],[7499.99,1015],[7999.99,1120],[8499.99,1147.5],[8999.99,1175],[9999.99,1175],[10499.99,1250],[10999.99,1250],[11499.99,1250],[11999.99,1260],[12499.99,1270],[14999.99,1285]];
+function tableFee(bid,t){for(const [max,val] of t)if(bid<=max)return val;return bid*({normalSec:.075,normalUn:.125,highSec:.06,highUn:.11}[t.name]||0)}
+function getFee(bid,client,payment){
+ let t;
+ if(client==='high') t=payment==='secured'?highSec:highUn;
+ else t=payment==='secured'?normalSec:normalUn;
+ const name=client==='high'?(payment==='secured'?'highSec':'highUn'):(payment==='secured'?'normalSec':'normalUn');
+ for(const [max,val] of t)if(bid<=max)return val;
+ return bid*({normalSec:.075,normalUn:.125,highSec:.06,highUn:.11}[name]);
+}
+function virtual(b){if(b<100)return 0;if(b<500)return 50;if(b<1000)return 65;if(b<1500)return 85;if(b<2000)return 95;if(b<4000)return 110;if(b<6000)return 125;if(b<8000)return 145;return 160}
+function money(x){return x.toLocaleString('en-US',{style:'currency',currency:'USD'})}
+function calc(){
+ const bid=Math.max(0,Number(document.getElementById('bid').value)||0);
+ const client=document.getElementById('client').value,pay=document.getElementById('payment').value;
+ const bf=getFee(bid,client,pay),vf=virtual(bid),gate=95,title=20,env=15;
+ const taxOn=client==='personal'&&document.getElementById('tax').checked;
+ const tax=taxOn?bid*.10:0;
+ const total=bid+bf+vf+gate+title+env+tax;
+ document.getElementById('taxbox').classList.toggle('show',client==='personal');
+ document.getElementById('result').innerHTML=`
+ <div class="row"><span>Final Bid</span><span class="fee">${money(bid)}</span></div>
+ <div class="row"><span>Buyer Fee</span><span class="fee">${money(bf)}</span></div>
+ <div class="row"><span>Virtual Bid Fee — Live Bid</span><span class="fee">${money(vf)}</span></div>
+ <div class="row"><span>Gate Fee</span><span class="fee">${money(gate)}</span></div>
+ <div class="row"><span>Title Shipping</span><span class="fee">${money(title)}</span></div>
+ <div class="row"><span>Environmental Fee</span><span class="fee">${money(env)}</span></div>
+ ${taxOn?`<div class="row"><span>Sales Tax — 10%</span><span class="fee">${money(tax)}</span></div>`:''}
+ <div class="row total"><span>TOTAL COPART</span><span>${money(total)}</span></div>`;
+}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));
+document.getElementById('client').addEventListener('change',calc);
+calc();
+</script>
+</body></html>
